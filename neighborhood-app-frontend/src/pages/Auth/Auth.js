@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 
-function SignUp() {
+function Auth() {
     const [IsSignUp, setIsSignUp] = useState(false);
     const [inputs, setInputs] = useState({
         email: "",
@@ -52,7 +52,7 @@ function SignUp() {
                             variant="h3" 
                             textAlign={"center"} 
                             padding={5} 
-                            color="#ffba00"
+                            color="#202121"   //"#ffba00"
                         >
                             {IsSignUp ? "Sign Up" : "Login"} 
                         </Typography>
@@ -79,11 +79,11 @@ function SignUp() {
                             type="submit"
                             variant="contained" 
                             sx={{
-                                backgroundColor: "#ffba00",
+                                backgroundColor: "#1976d2",
                                 marginTop: 2,
                                 ":hover":{
                                     opacity: 0.8,
-                                    backgroundColor: "#ffba00",
+                                    backgroundColor: "#1976d2",
                                 }
                             }}
                         >
@@ -93,8 +93,7 @@ function SignUp() {
                             endIcon={IsSignUp ? <LoginOutlinedIcon /> : <HowToRegOutlinedIcon />}
                             onClick={resetState}
                             sx={{
-                                marginTop: 2,
-                                color: "#ffba00"
+                                marginTop: 2
                             }}
                         >
                            {IsSignUp ? "Login" : "Sign up"}
@@ -106,4 +105,4 @@ function SignUp() {
     )
 }
 
-export default SignUp
+export default Auth
