@@ -10,11 +10,11 @@ import Header from './common/Header'
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Post />
+      <Post /> 
       {/* <Auth /> */}
       <Sidebar />
       <Footer />
+      <Header />
     </div>
   );
 }
