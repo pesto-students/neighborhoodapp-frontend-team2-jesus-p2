@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './Post.css';
 import PostForm from './PostForm';
 import CommentIcon from '@mui/icons-material/Comment';
+import Comment from './../Comment/Comment'
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -85,6 +86,7 @@ export default function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
             <PostForm />
+            <Comment />
         </CardContent>
       </Collapse>
     </Card>
