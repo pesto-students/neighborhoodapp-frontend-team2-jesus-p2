@@ -1,20 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
 import Auth from './pages/Auth/Auth'
-import Sidebar from './common/Sidebar/Sidebar';
-import Footer from './common/Footer';
 import Post from './pages/Post/Post';
-import Header from './common/Header'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+
 
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Post /> 
-      <Auth />
-      <Sidebar />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Auth />} />
+          <Route path="/register" element={<Auth />} />
+          <Route path="/posts" element={<Post />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

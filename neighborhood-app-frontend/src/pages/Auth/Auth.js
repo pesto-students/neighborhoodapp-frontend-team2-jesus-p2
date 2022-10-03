@@ -3,22 +3,57 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Auth() {
     const [IsSignUp, setIsSignUp] = useState(false);
     const [inputs, setInputs] = useState({
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
+    const [msg, setMsg] = useState('');
+    const history = useNavigate();
     const handleChange = (e) => {
         setInputs((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value,
         }))
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(inputs)
+        if(IsSignUp){
+            try{
+                await axios.post('http://localhost:8080/users', {
+                    email: inputs.email,
+                    password: inputs.password,
+                    confirmPassword: inputs.confirmPassword
+                });
+                history('/')
+                setIsSignUp(false)
+            }catch (error) {
+                if(error.response){
+                    setMsg(error.response.data.msg);
+                }
+            }
+        }else {
+            console.log("Login Auth", IsSignUp)
+            try {
+                await axios.post('http://localhost:8080/login', {
+                    email: inputs.email,
+                    password: inputs.password
+                })
+                history('/posts');
+            }catch (error) {
+                console.log("Error", error.response.data.msg)
+                if (error.response) {
+                    setMsg(error.response.data.msg);
+                }
+            }
+        }
+        // console.log(inputs)
     }
     const resetState = () => {
         setInputs({
@@ -74,6 +109,15 @@ function Auth() {
                             name="password"
                             onChange={handleChange}
                         />
+                        { IsSignUp && <TextField 
+                            value={inputs.confirmPassword}
+                            margin="normal" 
+                            type={"password"} 
+                            variant="outlined" 
+                            placeholder="Confirm Password"
+                            name="confirmPassword"
+                            onChange={handleChange}
+                        />}
                         <Button
                             endIcon={IsSignUp ? <HowToRegOutlinedIcon /> : <LoginOutlinedIcon />}
                             type="submit"

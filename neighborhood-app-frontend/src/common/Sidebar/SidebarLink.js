@@ -1,8 +1,8 @@
 import "./sidebarLink.css";
 
-function SidebarLink({ text, Icon }) {
+function SidebarLink({ text, Icon, onClick }) {
   return(
-    <div className="link" >
+    <div className="link" onClick={onClick}>
         <Icon />
         <h2>{text}</h2>
     </div>
